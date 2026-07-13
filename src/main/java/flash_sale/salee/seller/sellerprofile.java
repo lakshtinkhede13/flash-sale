@@ -21,10 +21,14 @@ public class sellerprofile {
 
 
 
-    private LocalDateTime createdat;
+
     private int number;
-    private int gst;
+    private String gst;
     private boolean verfied;
+    private String shopname;
+    private String gstnumber;
+
+    private LocalDateTime createdat;
 
     @OneToMany(mappedBy = "sellerprofile")
     private List<product> products;

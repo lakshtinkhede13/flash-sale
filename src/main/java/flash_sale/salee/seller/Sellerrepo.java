@@ -5,4 +5,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface Sellerrepo extends JpaRepository<sellerprofile,Long> {
+    boolean existsByGstnumber(String gstnumber);
 }
