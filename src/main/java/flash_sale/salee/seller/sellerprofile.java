@@ -23,7 +23,7 @@ public class sellerprofile {
 
 
     private int number;
-    private String gst;
+   //    private String gst;
     private boolean verfied;
     private String shopname;
     private String gstnumber;

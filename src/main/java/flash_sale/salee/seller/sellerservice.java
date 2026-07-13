@@ -22,11 +22,15 @@ public class sellerservice {
     }
 
     public Responseseller responseseller(Registerseller registerseller ){
-        if (sellerrepo.existsByGstnumber(registerseller.getGstnumber())){
-            throw new RuntimeException("gst number is allocated use different");
-        }
 
-        Users users = userrepository.findById(registerseller.getUserid())
+
+
+        if (sellerrepo.existsByGstnumber(registerseller.getGstnumber())){
+           throw new RuntimeException("gst number is allocated use different");
+       }
+
+
+        Users users = userrepository.findById(registerseller.getId())
                 .orElseThrow(()-> new RuntimeException("user not found"));
 
 
@@ -48,6 +52,8 @@ public class sellerservice {
         responseseller.setShopname(seller.getShopname());
         responseseller.setGstnumber(seller.getGstnumber());
         responseseller.setVerifed(seller.isVerfied());
+
+
 
         return  responseseller;
 
@@ -82,7 +88,7 @@ public class sellerservice {
        sellerprofile sellerprofile = sellerrepo.findById(id).
                orElseThrow(()->new RuntimeException("user not found"));
                sellerprofile.setShopname(responseseller.getShopname());
-               sellerprofile.setGst(registerseller.getGstnumber());
+               sellerprofile.setGstnumber(registerseller.getGstnumber());
 
                sellerrepo.save(sellerprofile);
 

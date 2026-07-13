@@ -4,7 +4,8 @@ import lombok.Data;
 
       @Data
     public class Registerseller {
-    private Long userid;
+
+    private Long id;
     private String shopname;
     private String gstnumber;
 
