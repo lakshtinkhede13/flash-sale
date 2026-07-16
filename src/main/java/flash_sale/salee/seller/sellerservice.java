@@ -1,11 +1,14 @@
 package flash_sale.salee.seller;
 import flash_sale.salee.DTO.UserResponse;
+import flash_sale.salee.Exceptionhandler.sellernotfound;
+import flash_sale.salee.Exceptionhandler.usernotfound;
 import flash_sale.salee.seller_dto.Registerseller;
 import flash_sale.salee.seller_dto.Responseseller;
 import flash_sale.salee.user.Userrepository;
 import flash_sale.salee.user.Users;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,15 +29,16 @@ public class sellerservice {
 
 
         if (sellerrepo.existsByGstnumber(registerseller.getGstnumber())){
-           throw new RuntimeException("gst number is allocated use different");
+           throw new sellernotfound("gst number is allocated use different");
        }
 
 
         Users users = userrepository.findById(registerseller.getId())
-                .orElseThrow(()-> new RuntimeException("user not found"));
+                .orElseThrow(()-> new usernotfound("user not found"));
 
 
                 sellerprofile seller = new sellerprofile();
+                seller.setCreatedat(LocalDateTime.now());
 
                 seller.setShopname(registerseller.getShopname());
                 seller.setGstnumber(registerseller.getGstnumber());
@@ -87,7 +91,7 @@ public class sellerservice {
        Responseseller responseseller = new Responseseller();
        sellerprofile sellerprofile = sellerrepo.findById(id).
                orElseThrow(()->new RuntimeException("user not found"));
-               sellerprofile.setShopname(responseseller.getShopname());
+               sellerprofile.setShopname(registerseller.getShopname());
                sellerprofile.setGstnumber(registerseller.getGstnumber());
 
                sellerrepo.save(sellerprofile);

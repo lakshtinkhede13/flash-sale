@@ -1,4 +1,4 @@
-package flash_sale.salee.reservation;
+package flash_sale.salee.Reservation;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

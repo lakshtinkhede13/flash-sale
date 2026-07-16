@@ -1,4 +1,4 @@
-package flash_sale.salee.reservation;
+package flash_sale.salee.Reservation;
 
 public enum status {
 

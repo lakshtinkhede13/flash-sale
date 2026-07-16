@@ -2,6 +2,7 @@ package flash_sale.salee.user;
 
 import flash_sale.salee.DTO.RegisterRequest;
 import flash_sale.salee.DTO.UserResponse;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,7 +17,7 @@ public class UserController {
         this.userservice=userservice;
 
         } @PostMapping("/register")
-        public UserResponse registeruser(@RequestBody RegisterRequest request){
+        public UserResponse registeruser(@Valid @RequestBody RegisterRequest request){
         return userservice.registeruser(request);
     }
 
@@ -26,7 +27,7 @@ public class UserController {
         }
         @PutMapping("/{id}")
 
-    public UserResponse update(@PathVariable Long id,@RequestBody RegisterRequest request){
+    public UserResponse update(@Valid@PathVariable Long id,@RequestBody RegisterRequest request){
 
 
             return userservice.update(id,request);
@@ -35,7 +36,7 @@ public class UserController {
 
         @DeleteMapping("/{id}")
 
-    public String delete(@PathVariable  long id){
+    public String delete(@Valid @PathVariable  long id){
         return userservice.delete(id);
 
         }

@@ -3,6 +3,7 @@ package flash_sale.salee.user;
 
 import flash_sale.salee.DTO.RegisterRequest;
 import flash_sale.salee.DTO.UserResponse;
+import flash_sale.salee.Exceptionhandler.usernotfound;
 import org.apache.catalina.User;
 import org.springframework.stereotype.Service;
 
@@ -53,7 +54,7 @@ public class Userservice {
     public UserResponse registeruser(RegisterRequest request) {
 
         if (userrepository.existsByemail(request.getEmail())) {
-            throw new RuntimeException("email already exist");
+            throw new usernotfound("email already exist");
         }
 
 
@@ -104,7 +105,7 @@ public UserResponse update(Long id ,RegisterRequest request){
         public String delete(Long id){
 
             Users users = userrepository.findById(id)
-                    .orElseThrow( ()->new RuntimeException("user not found"));
+                    .orElseThrow( ()->new usernotfound("user not found"));
             userrepository.deleteById(id);
             return "user deleteed succefully";
 
